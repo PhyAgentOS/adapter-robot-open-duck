@@ -1,0 +1,10 @@
+[project]
+name = "open-duck-mujoco"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["dora-rs==0.4.1", "forge-common>=1.0.0,<2", "forge-msgs>=1.0.0,<2", "mujoco==3.3.7", "numpy>=2.0.0", "opencv-python", "pyyaml>=6.0", "open-duck==0.1.0"]
+
+[tool.uv.sources]
+forge-common = { path = "../../../../../../forge/packages/common", editable = true }
+forge-msgs = { path = "../../../../../../forge/packages/msgs", editable = true }
+open-duck = { path = "../../../../", editable = true }

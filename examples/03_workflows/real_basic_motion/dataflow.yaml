@@ -1,0 +1,34 @@
+nodes:
+  - id: open_duck
+    path: ../../../.venv/bin/robots-open-duck
+    args: run --finite
+    inputs:
+      tick:
+        source: dora/timer/millis/20
+        queue_size: 1
+      action:
+        source: task_robot/robot_0/action
+        queue_size: 1
+      finish: motion_source/finish
+    outputs: [state]
+  - id: task_robot
+    path: run_task_robot.sh
+    args: --config task_robot.yaml
+    inputs:
+      action:
+        source: motion_source/action
+        queue_size: 1
+      robot_0/state:
+        source: open_duck/state
+        queue_size: 1
+    outputs: [action, robot_0/action, proprio_state]
+  - id: motion_source
+    path: run_motion_source.sh
+    inputs:
+      tick:
+        source: dora/timer/millis/20
+        queue_size: 1
+      proprio_state:
+        source: task_robot/proprio_state
+        queue_size: 1
+    outputs: [action, finish]

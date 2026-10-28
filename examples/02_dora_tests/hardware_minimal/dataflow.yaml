@@ -1,0 +1,17 @@
+nodes:
+  - id: open_duck
+    path: ../../../.venv/bin/robots-open-duck
+    args: run
+    env:
+      OPEN_DUCK_READ_ONLY: "1"
+    inputs:
+      tick:
+        source: dora/timer/millis/100
+        queue_size: 1
+    outputs: [state]
+  - id: state_check
+    path: ../../../.venv/bin/python
+    args: state_check.py
+    inputs:
+      state: open_duck/state
+    outputs: []

@@ -1,0 +1,100 @@
+model_path: ../../../../assets/mjcf/open_duck_fixed.xml
+control_hz: 50
+image_format: raw
+initial_positions:
+  left_hip_yaw: 0.002
+  left_hip_roll: 0.053
+  left_hip_pitch: -0.63
+  left_knee: 1.368
+  left_ankle: -0.784
+  neck_pitch: 0.0
+  head_pitch: 0.0
+  head_yaw: 0.0
+  head_roll: 0.0
+  right_hip_yaw: -0.003
+  right_hip_roll: -0.065
+  right_hip_pitch: 0.635
+  right_knee: 1.379
+  right_ankle: -0.796
+image_forward:
+  front:
+    output: image/front
+    fps: 15
+    width: 640
+    height: 480
+joints:
+- name: left_hip_yaw
+  mode: position
+  unit: radians
+- name: left_hip_roll
+  mode: position
+  unit: radians
+- name: left_hip_pitch
+  mode: position
+  unit: radians
+- name: left_knee
+  mode: position
+  unit: radians
+- name: left_ankle
+  mode: position
+  unit: radians
+- name: neck_pitch
+  mode: position
+  unit: radians
+- name: head_pitch
+  mode: position
+  unit: radians
+- name: head_yaw
+  mode: position
+  unit: radians
+- name: head_roll
+  mode: position
+  unit: radians
+- name: right_hip_yaw
+  mode: position
+  unit: radians
+- name: right_hip_roll
+  mode: position
+  unit: radians
+- name: right_hip_pitch
+  mode: position
+  unit: radians
+- name: right_knee
+  mode: position
+  unit: radians
+- name: right_ankle
+  mode: position
+  unit: radians
+robots:
+- id: robot_0
+  prefix: ''
+  actuator_order:
+  - left_hip_yaw
+  - left_hip_roll
+  - left_hip_pitch
+  - left_knee
+  - left_ankle
+  - neck_pitch
+  - head_pitch
+  - head_yaw
+  - head_roll
+  - right_hip_yaw
+  - right_hip_roll
+  - right_hip_pitch
+  - right_knee
+  - right_ankle
+  joint_to_actuator:
+    left_hip_yaw: left_hip_yaw
+    left_hip_roll: left_hip_roll
+    left_hip_pitch: left_hip_pitch
+    left_knee: left_knee
+    left_ankle: left_ankle
+    neck_pitch: neck_pitch
+    head_pitch: head_pitch
+    head_yaw: head_yaw
+    head_roll: head_roll
+    right_hip_yaw: right_hip_yaw
+    right_hip_roll: right_hip_roll
+    right_hip_pitch: right_hip_pitch
+    right_knee: right_knee
+    right_ankle: right_ankle

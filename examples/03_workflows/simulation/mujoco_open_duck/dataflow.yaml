@@ -1,0 +1,33 @@
+nodes:
+  - id: mujoco
+    path: run_mujoco.sh
+    inputs:
+      tick: dora/timer/millis/20
+      action: task_robot/action
+    outputs: [proprio_state, image/front]
+    args: --config simulator.yaml
+  - id: task_robot
+    path: run_task_robot.sh
+    inputs:
+      tick: dora/timer/millis/20
+      action: motion_source/action
+      proprio_state: mujoco/proprio_state
+      image/front: mujoco/image/front
+    outputs: [action, robot_0/action, proprio_state, image/front]
+    args: --config task_robot.yaml
+  - id: motion_source
+    path: run_motion_source.sh
+    inputs:
+      tick: dora/timer/millis/20
+      proprio_state: task_robot/proprio_state
+    outputs: [action]
+  - id: acceptance
+    path: run_acceptance.sh
+    inputs:
+      proprio_state: task_robot/proprio_state
+      image/front: task_robot/image/front
+    outputs: []
+  - id: image_viewer
+    path: ${FORGE_VIEWER_BIN}/image_viewer
+    inputs:
+      image/front: task_robot/image/front

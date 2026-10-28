@@ -1,0 +1,12 @@
+# Open Duck Mini v2 默认连接配置，随仓库交付。
+# 使用前按实际机器人修改 SSH 地址、远程 Python、Runtime 和校准文件路径。
+backend: ssh
+ssh_target: pi@raspberrypi.local
+remote_python: /home/pi/miniconda3/envs/duck310/bin/python
+remote_runtime_dir: ~/Open_Duck_Mini_Runtime-2
+duck_config_path: ~/duck_config.json
+port: /dev/ttyACM0
+# 当前基础动作配置允许动作；仅需读取状态时可改为 false。
+enable_action: true
+rpc_timeout_seconds: 4.0
+command_timeout_seconds: 3.0
