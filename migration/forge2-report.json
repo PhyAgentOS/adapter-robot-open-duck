@@ -1,7 +1,6 @@
 {
   "repository": "adapter-robot-open-duck",
   "node_candidate_version": "2.0.0",
-  "baseline_commit": "37e841fbaaded61cdd1cf1ff4ba298243c9c5e12",
   "changes": [
     "Replace machine-local Forge sources with public packages.",
     "Upgrade the independent MuJoCo example and its local node dependency.",
