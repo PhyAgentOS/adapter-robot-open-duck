@@ -1,10 +1,10 @@
 [project]
 name = "open-duck"
-version = "0.1.0"
+version = "2.0.0"
 description = "Forge driver and assets for Open Duck Mini v2"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["dora-rs==0.4.1", "typer>=0.25.1", "pyyaml>=6.0", "forge-common>=1.0.0,<2", "forge-msgs>=1.0.0,<2", "forge-robot>=1.0.0,<2"]
+dependencies = ["dora-rs>=1.0.1,<2", "typer>=0.25.1", "pyyaml>=6.0", "forge-common>=2.1.0,<3", "forge-msgs>=2.0.0,<3", "forge-robot>=2.0.0,<3"]
 
 [project.scripts]
 robots-open-duck = "robots_open_duck.main:main"
@@ -22,9 +22,5 @@ requires = ["uv_build>=0.8.17,<0.9.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
-forge-common = { path = "../../forge/packages/common", editable = true }
-forge-msgs = { path = "../../forge/packages/msgs", editable = true }
-forge-robot = { path = "../../forge/packages/robot", editable = true }
-
 [tool.uv.build-backend]
 module-name = "robots_open_duck"
