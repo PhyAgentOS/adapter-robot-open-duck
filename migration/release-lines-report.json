@@ -1,0 +1,76 @@
+{
+  "repository": "PhyAgentOS/adapter-robot-open-duck",
+  "target": "master",
+  "scope": "Build and document Forge 1.x and 2.x releases",
+  "release_line_unit_tests": {
+    "command": "python -m unittest discover -s scripts -p test_release_line.py -v",
+    "passed": 12
+  },
+  "workflow_validation": {
+    "tool": "actionlint 1.7.12",
+    "result": "passed"
+  },
+  "distribution_checks": {
+    "result": "passed",
+    "artifacts": [
+      {
+        "name": "open_duck-0.1.0-py3-none-any.whl",
+        "size": 30183,
+        "sha256": "c2cdde44b4ebdb1ca546a8044fd4fc6d35d2e333be0ed826f93d6ba70eb71d31"
+      },
+      {
+        "name": "open_duck-0.1.0.tar.gz",
+        "size": 22463,
+        "sha256": "8da694462d95f10b1a2199cb6e3572dfa9564be5131fd0af7bc56289ae7eaa87"
+      }
+    ]
+  },
+  "source_profiles": [
+    {
+      "repo": "PhyAgentOS/adapter-robot-open-duck",
+      "line": "1.x",
+      "version": "1.0.0",
+      "forge_majors": [
+        1
+      ],
+      "dora_versions": [
+        [
+          0,
+          4
+        ]
+      ],
+      "kind": "python",
+      "ready": true
+    },
+    {
+      "repo": "PhyAgentOS/adapter-robot-open-duck",
+      "line": "2.x",
+      "version": "0.1.0",
+      "forge_majors": [
+        1
+      ],
+      "dora_versions": [
+        [
+          0,
+          4
+        ]
+      ],
+      "kind": "python",
+      "ready": false
+    }
+  ],
+  "dora_run": {
+    "single_node": {
+      "status": "not-run",
+      "reason": "This change verifies release tooling and version metadata; no current node runtime acceptance is claimed."
+    },
+    "gateway_chain": {
+      "status": "not-run",
+      "reason": "Fresh integration acceptance remains required; every such chain must include adapter-forge-gateway from the same Forge line."
+    }
+  },
+  "linux_binary_release_build": "not-run in this change; existing binary workflow checks are preserved",
+  "hardware_model_sustained_rollback_acceptance": "pending",
+  "published_tags_releases_modified": false,
+  "gitlab_sync": false
+}
