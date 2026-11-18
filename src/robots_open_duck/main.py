@@ -44,7 +44,7 @@ def cli(ctx: typer.Context, config: str | None = typer.Option(None,"--config",he
     if version:
         from importlib.metadata import version as package_version
         try: typer.echo(package_version("open-duck"))
-        except Exception: typer.echo("0.1.0")
+        except Exception: typer.echo("1.0.0")
         raise typer.Exit()
     if ctx.invoked_subcommand is None:
         raise typer.Exit(run_node(load_node_config(config)))
