@@ -39,3 +39,7 @@ Unit tests and simulated backends cover software contracts. Device motion, nativ
 This branch prepares node version `2.0.0` for Dora 1.x, frozen to Dora `1.0.1` for migration validation. It uses the official Forge 2.x distributions; Common is at least `2.1.0`. Regenerated locks and all executable entrypoints are part of the change.
 
 Every change report must list repository, changes and test evidence, including per-node `dora run` records and a chained test containing `adapter-forge-gateway`. Unavailable hardware/model checks remain pending. Source PRs do not publish stable releases or synchronize GitLab; synchronization follows full acceptance.
+
+## Platform-specific tests
+
+The Pi bridge targets Linux and uses /proc for process ownership checks. Its subprocess integration tests run on Linux CI; portable tests run on other platforms without connecting to hardware.
