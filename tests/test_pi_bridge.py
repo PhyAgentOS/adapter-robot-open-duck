@@ -16,6 +16,8 @@ from robots_open_duck import ssh_io
 
 @pytest.fixture
 def bridge_config(tmp_path, monkeypatch):
+    if sys.platform != "linux":
+        pytest.skip("Pi bridge checks process ownership through Linux /proc")
     runtime = tmp_path / "runtime"
     package = runtime / "mini_bdx_runtime" / "mini_bdx_runtime"
     package.mkdir(parents=True)

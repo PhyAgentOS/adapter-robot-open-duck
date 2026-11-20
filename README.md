@@ -54,3 +54,7 @@ The workflow verifies tag type, source commit, branch ancestry, source version a
 This repository currently releases Python wheel/sdist (when its root project has a build backend) and a source archive. It has no Ubuntu binary workflow; standalone binaries require a separate validated build path.
 
 The source archive preserves the tagged tree; external SDKs/submodules, model downloads and site configuration remain separate prerequisites. A dependency or SDK build failure is not successful release acceptance. Build success does not establish single-node or Gateway-chain `dora run`, hardware, real-model, sustained-run or rollback acceptance. Every acceptance chain must include `adapter-forge-gateway` from the same compatibility line. Forge 2.x is a **breaking change**: align Forge libraries, node versions and Dora across the entire deployment; keep 1.x on its maintenance branch.
+
+### Forge 1.x maintenance dependencies
+
+This branch uses public Forge 1.x packages, including `forge-msgs>=1.3.1,<2`, with Pillow 13 in the lockfile. It does not require a neighboring Forge source checkout. Run `uv sync --frozen --extra test` to reproduce the environment. Pi bridge process-ownership tests require Linux `/proc`; only those tests skip on other platforms. Run the complete suite on Linux before hardware acceptance.

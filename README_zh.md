@@ -140,3 +140,7 @@ gh workflow run release.yml --ref master -f release_line=2.x -f tag="$TAG"
 当前发布根项目支持的 Python wheel/sdist 及源码归档；没有 Ubuntu 二进制工作流，独立二进制需另行建立并验证构建路径。
 
 源码归档保留标签中的文件；外部 SDK/submodule、模型下载与现场配置仍是独立前置条件。依赖或 SDK 构建失败不能视为发布验收通过。构建成功不代表单节点或串联 `dora run`、真机、真实模型、长稳态或回滚验收通过；每条验收链必须包含相同兼容线的 `adapter-forge-gateway`。Forge 2.x 属于 **breaking change**，整个部署的 Forge 库、节点版本与 Dora 必须对齐；1.x 保留在维护分支。
+
+### Forge 1.x 维护依赖
+
+本分支使用公开发布的 Forge 1.x 包，包括 `forge-msgs>=1.3.1,<2`，锁文件采用 Pillow 13，无需相邻 Forge 源码目录。使用 `uv sync --frozen --extra test` 复现环境。Pi 桥接进程归属测试依赖 Linux `/proc`，其他平台只跳过这些测试；真机验收前需在 Linux 运行完整测试集。
