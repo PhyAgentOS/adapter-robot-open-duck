@@ -1,0 +1,264 @@
+{
+  "repository": "adapter-robot-open-duck",
+  "round": "msgs-2.1.0 alignment / 2026-11-12",
+  "breaking_change": "Forge 1.x / Dora 0.4.x to Forge 2.x / Dora 1.x requires aligned Forge packages, runtime services, node peers and rebuilt artifacts. Forge families version independently. forge_msgs.v1 remains unchanged.",
+  "changes": [
+    "Update paired README deployment/version compatibility notice",
+    "Require Python forge-msgs >=2.1.0,<3 and lock public Msgs 2.1.0 / Pillow 13.0.0, preserving all other locked package versions"
+  ],
+  "lock_updates": [
+    {
+      "repo": "adapter-robot-open-duck",
+      "lock": "examples/03_workflows/simulation/mujoco_open_duck/uv.lock",
+      "command": [
+        "${WORKSPACE}/.tools/bin/uv",
+        "lock",
+        "--upgrade-package",
+        "forge-msgs==2.1.0",
+        "--upgrade-package",
+        "pillow==13.0.0"
+      ],
+      "exit_code": 0,
+      "version_changes": [
+        {
+          "name": "forge-msgs",
+          "before": "2.0.0",
+          "after": "2.1.0"
+        },
+        {
+          "name": "pillow",
+          "before": "12.3.0",
+          "after": "13.0.0"
+        }
+      ]
+    },
+    {
+      "repo": "adapter-robot-open-duck",
+      "lock": "uv.lock",
+      "command": [
+        "${WORKSPACE}/.tools/bin/uv",
+        "lock",
+        "--upgrade-package",
+        "forge-msgs==2.1.0",
+        "--upgrade-package",
+        "pillow==13.0.0"
+      ],
+      "exit_code": 0,
+      "version_changes": [
+        {
+          "name": "forge-msgs",
+          "before": "2.0.0",
+          "after": "2.1.0"
+        },
+        {
+          "name": "pillow",
+          "before": "12.3.0",
+          "after": "13.0.0"
+        }
+      ]
+    }
+  ],
+  "lock_checks": [
+    {
+      "repo": "adapter-robot-open-duck",
+      "lock": "examples/03_workflows/simulation/mujoco_open_duck/uv.lock",
+      "check_exit": 0
+    },
+    {
+      "repo": "adapter-robot-open-duck",
+      "lock": "uv.lock",
+      "check_exit": 0
+    }
+  ],
+  "software_tests": {
+    "repo": "adapter-robot-open-duck",
+    "environment": "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python",
+    "commands": [
+      [
+        "${WORKSPACE}/.tools/bin/uv",
+        "pip",
+        "install",
+        "--python",
+        "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python",
+        "--no-deps",
+        "--index-url",
+        "https://pypi.org/simple",
+        "forge-msgs==2.1.0",
+        "pillow==13.0.0"
+      ],
+      [
+        "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python",
+        "-c",
+        "from importlib.metadata import version; import json; print(json.dumps({n:version(n) for n in ['forge-msgs','pillow','dora-rs']}))"
+      ],
+      [
+        "${WORKSPACE}/.tools/bin/uv",
+        "pip",
+        "check",
+        "--python",
+        "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python"
+      ],
+      [
+        "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--import-mode=importlib"
+      ],
+      [
+        "${WORKSPACE}/adapter-robot-open-duck/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ]
+    ],
+    "scope": "Existing local test environment with exact public Msgs/Pillow update; platform SDK exclusions are reported, not production acceptance.",
+    "update_exit": 0,
+    "versions_exit": 0,
+    "dependency_check_exit": 0,
+    "tests_exit": 1,
+    "test_summary": [
+      "FAILED tests/test_pi_bridge.py::test_read_only_bridge_does_not_change_gains_or_torque",
+      "FAILED tests/test_pi_bridge.py::test_remote_calibration_applied_once_and_shutdown_releases_torque",
+      "FAILED tests/test_pi_bridge.py::test_native_sdk_stdout_cannot_corrupt_rpc - R...",
+      "FAILED tests/test_pi_bridge.py::test_outside_startup_pose_recovers_through_driver_and_bridge",
+      "FAILED tests/test_pi_bridge.py::test_invalid_step_is_rejected_and_motor_is_released",
+      "FAILED tests/test_pi_bridge.py::test_calibrated_sweeps_reach_all_permitted_extremes",
+      "FAILED tests/test_pi_bridge.py::test_watchdog_stops_even_when_pc_sends_no_shutdown_request",
+      "7 failed, 20 passed, 1 skipped in 1.34s"
+    ],
+    "retry_reason": "Use repository default import mode (test-local helper imports), or existing SDK-excluded portable environment.",
+    "installed_versions": {
+      "forge-msgs": "2.1.0",
+      "pillow": "13.0.0",
+      "dora-rs": "1.0.1"
+    }
+  },
+  "dependency_audit": {
+    "repo": "adapter-robot-open-duck",
+    "audit_exit": 0,
+    "findings": [],
+    "skipped": []
+  },
+  "dora_run_records": [
+    {
+      "repo": "adapter-robot-open-duck",
+      "entry": "robots-open-duck",
+      "mode": "chain",
+      "command": [
+        "${WORKSPACE}/.test-env/bin/dora",
+        "run",
+        "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck/chain/dataflow.yaml",
+        "--stop-after",
+        "4s"
+      ],
+      "includes_gateway": true,
+      "exit_code": 1,
+      "passed": false,
+      "status": "blocked / not accepted",
+      "elapsed_seconds": 0.783,
+      "error": null,
+      "scope": "Negative startup diagnostic only. Hardware endpoints were replaced with absent local devices, actions disabled, remote SSH excluded and model downloads disabled. This does not demonstrate successful node operation.",
+      "log_tail": [
+        "\u2502        err_msg)                                                              \u2502",
+        "\u2502   1958 \u2502   \u2502   \u2502   \u2502   raise child_exception_type(err_msg)                   \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "FileNotFoundError: [Errno 2] No such file or directory: 'ssh'",
+        "---------------------------------------------------------------------------------",
+        "",
+        "",
+        "",
+        "There is 1 more consequential error. Check the `out/01a1ced0-419e-77ed-a53f-0100cbd96155` folder for full details.",
+        "",
+        "Location:",
+        "    binaries/cli/src/common.rs:55:17"
+      ],
+      "source_report": "runtime-blocked/robots-open-duck/chain/report.json",
+      "runtime_errors": [
+        "2026-11-12T08:11:57.481147Z ERROR node_failure: dora_daemon::spawn::prepared: node exited with error: ExitCode(1) node_id=target dataflow_id=01a1ced0-419e-77ed-a53f-0100cbd96155",
+        "16:11:57 ERROR  target: daemon exited with code 1 with stderr output:",
+        "16:11:57 stdout gateway: 2026-11-12 16:11:57 - forge_gateway.cli - ERROR - gateway startup failed: Could not initiate node from environment variable. For dynamic node, please add a node id in the initialization function.",
+        "2026-11-12T08:11:57.962962Z ERROR node_failure: dora_daemon::spawn::prepared: node exited with error: ExitCode(1) node_id=gateway dataflow_id=01a1ced0-419e-77ed-a53f-0100cbd96155",
+        "16:11:57 ERROR  gateway: daemon exited with code 1. This error occurred because node `target` exited before connecting to dora."
+      ],
+      "local_evidence": "Full original Dora log is retained under validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck/chain/dora.log"
+    },
+    {
+      "repo": "adapter-robot-open-duck",
+      "entry": "robots-open-duck",
+      "mode": "single",
+      "command": [
+        "${WORKSPACE}/.test-env/bin/dora",
+        "run",
+        "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck/single/dataflow.yaml",
+        "--stop-after",
+        "4s"
+      ],
+      "includes_gateway": false,
+      "exit_code": 1,
+      "passed": false,
+      "status": "blocked / not accepted",
+      "elapsed_seconds": 0.483,
+      "error": null,
+      "scope": "Negative startup diagnostic only. Hardware endpoints were replaced with absent local devices, actions disabled, remote SSH excluded and model downloads disabled. This does not demonstrate successful node operation.",
+      "log_tail": [
+        "\u2502   1956 \u2502   \u2502   \u2502   \u2502   \u2502   else:                                             \u2502",
+        "\u2502   1957 \u2502   \u2502   \u2502   \u2502   \u2502   \u2502   raise child_exception_type(errno_num,         \u2502",
+        "\u2502        err_msg)                                                              \u2502",
+        "\u2502   1958 \u2502   \u2502   \u2502   \u2502   raise child_exception_type(err_msg)                   \u2502",
+        "\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f",
+        "FileNotFoundError: [Errno 2] No such file or directory: 'ssh'",
+        "---------------------------------------------------------------------------------",
+        "",
+        "",
+        "",
+        "Location:",
+        "    binaries/cli/src/common.rs:55:17"
+      ],
+      "source_report": "runtime-blocked/robots-open-duck/single/report.json",
+      "runtime_errors": [
+        "2026-11-12T08:11:57.189747Z ERROR node_failure: dora_daemon::spawn::prepared: node exited with error: ExitCode(1) node_id=target dataflow_id=01a1ced0-3fbc-7096-86f4-47b5d12e54ba",
+        "16:11:57 ERROR  target: daemon exited with code 1 with stderr output:"
+      ],
+      "local_evidence": "Full original Dora log is retained under validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck/single/dora.log"
+    },
+    {
+      "repo": "adapter-robot-open-duck",
+      "entry": "robots-open-duck-rl",
+      "mode": "single",
+      "command": [
+        "${WORKSPACE}/.test-env/bin/dora",
+        "run",
+        "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck-rl/single/dataflow.yaml",
+        "--stop-after",
+        "4s"
+      ],
+      "exit_code": 1,
+      "includes_gateway": false,
+      "passed": false,
+      "scope": "Missing RL and SSH connection profiles diagnostic only. Missing files fail before SSH or driver connection; no remote access or walking executed.",
+      "local_evidence": "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck-rl/single/dora.log"
+    },
+    {
+      "repo": "adapter-robot-open-duck",
+      "entry": "robots-open-duck-rl",
+      "mode": "chain",
+      "command": [
+        "${WORKSPACE}/.test-env/bin/dora",
+        "run",
+        "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck-rl/chain/dataflow.yaml",
+        "--stop-after",
+        "4s"
+      ],
+      "exit_code": 1,
+      "includes_gateway": true,
+      "passed": false,
+      "scope": "Missing RL and SSH connection profiles diagnostic only. Missing files fail before SSH or driver connection; no remote access or walking executed.",
+      "local_evidence": "${WORKSPACE}/validation/downstream-msgs210-20261112/runtime-blocked/robots-open-duck-rl/chain/dora.log"
+    }
+  ],
+  "remaining": "Seven Linux /proc-dependent tests fail on macOS; native and RL hardware profiles remain unaccepted.",
+  "acceptance": "Pending; software checks, fake/dummy backends and negative prerequisite records are scoped evidence only. Every new multi-node graph contains adapter-forge-gateway.",
+  "gitlab_sync": "Not performed; follows completed acceptance.",
+  "log_publication": "Original logs remain in the local validation workspace. This public report publishes reviewed commands, outcomes, assertions and limitations only."
+}
